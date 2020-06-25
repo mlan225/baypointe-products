@@ -1,0 +1,213 @@
+<%- include partials/header.ejs %>
+
+<div id="product-filter-wrapper">
+  <div class="contianer">
+    <div class="row">
+      <!-- classes such as col-md-8 and col-sm-12 are bootstrap classes,
+      these help control the sizes of columns. Check out "Bootstrap 
+      grid system" for more info -->
+      <div class="col-md-8 col-sm-12 text-center">
+        <div class="category-image"></div>
+      </div>
+      <div class="col-md-4 col-sm-12 product-filter-container">
+        <!-- the action in the form is used to hit a specific route. Hitting a route
+        will allow code to run server side. The method is used as the type of 
+        request to the server. Our form will be sending data, so it will be POST -->
+        <form class="category-options" action="" method="POST"></form>
+          <!-- this is using the vue framework to create the rest of these elements. I'll walk you through it:-->
+          <!-- the transition group is a vue component. Vue components look like a custom html element such as
+          <test></test> or <hello></hello>, vue allows you to create these, however, it also comes with some.
+          Transition group helps create the sliding appearence to the email and filter. You can find more about this
+          by looking us "vue transitions" -->
+          <transition-group tag="div" name="slide">
+            <!-- v-if is the same as a regular if statement. the v-if is using a value from vues "data" value
+            at the bottom. If show_filter_options is true, then show the element. The key is important for having
+            unique elements in the transition-class -->
+            <div id="product-filter-section" v-if="show_filter_options" key="1">
+              <div class="filter-title"><h5>Design your Fireplace</h5></div>
+                <!-- v-for is the same as "for each [individual item] in option_group ( you can find option group at the bottom 
+                in the data for the vue section )". I am also creating a groupIndex variable with each iteration of group -->
+                <div class="option-group" v-for="(group, groupIndex) in option_group" :key="group.option_group_text">
+                  <!-- v-on:click runs a function from the methods in the vue section on click -->
+                  <div class="option-group-text" v-on:click="toggleGroup(group)"><h6>{{ group.option_group_text }}<i class="open-icon fa fa-caret-up" :class="{turn: group.group_open}"  aria-hidden="true"></i></h6></div>
+                  <div class="option-dropdown" :class="{open: group.group_open}">
+                    <div class="option" v-for="option in group.options" :key="option.id">
+                      <label>
+                        <input :type="group.option_group_type" :name="group.option_group_name" :value="option" v-model="selected_filters[groupIndex]">
+                        {{ option.text }}
+                      </label> 
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div v-if="show_email_checkout" class="email-section" key="2">
+              <div class="email-section-text">
+                <h5>Confirm your information</h5>
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input class="form-control" type="email" name="email">
+                <small class="form-text text-muted">We will use this email to contact you</small>
+              </div>
+              <div class="form-group">
+                <label>First Name</label>
+                <input class="form-control" type="text" name="first_name">
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input class="form-control" type="text" name="first_name">
+              </div>
+              <div>
+                <button class="btn btn-danger bp-btn">Confirm and Send Inquery</button>
+              </div>
+            </div>
+          </transition-group>
+        </form>
+      </div>
+    </div>
+    <!-- vue would not pick up this element outside of container? -->
+    <div class="container-fluid total-section">
+      <div class="total-text">
+        <h3>Your total is: <span>${{total_price}}</span></h3>
+      </div>
+      <div class="total-btn">
+        <button v-on:click="toggleCheckoutTxt()" class="btn btn-danger bp-btn">{{checkout_btn_text}}</button>
+      </div> 
+    </div>
+  </div>
+</div>
+
+<script>
+  // this is the vue section. The option group object
+  // will be generated server side and sent to the view, but for
+  // demo purposes, I manually created the object
+
+  // the watch section will look to see if a specific data value changes. If it does,
+  // it will run the desired function
+
+  new Vue({
+    el: '#product-filter-wrapper',
+    data: {
+      selected_filters: [],
+      total_price: 0,
+      checkout_btn_disabled: false,
+      checkout_btn_text: 'Checkout',
+      show_filter_options: true,
+      show_email_checkout: false,
+      option_group: [
+        {
+          option_group_text: '1. Fireplace Model',
+          option_group_name: 'model',
+          option_group_type: 'radio',
+          group_open: true,
+          options: [
+            {
+              //id will be set using the mongoDB ID to stay unique.
+              id: 0,
+              text: '$1.00',
+              price: 1.00,
+            },
+            {
+              id: 1,
+              text: '$2.00',
+              price: 2.00,
+            },
+            {
+              id: 2,
+              text: '$3.00',
+              price: 3.00,
+            },
+          ]
+        },
+        {
+          option_group_text: '2. Stone Finish',
+          option_group_name: 'finish',
+          option_group_type: 'radio',
+          group_open: false,
+          options: [
+            {
+              id: 3,
+              text: '$1.00',
+              price: 1.00,
+            },
+            {
+              id: 4,
+              text: '$2.00',
+              price: 2.00,
+            },
+            {
+              id: 5,
+              text: '$3.00',
+              price: 3.00,
+            },
+          ]
+        },
+        {
+          option_group_text: '3. Fireplace Upgrades',
+          option_group_name: 'upgrades',
+          option_group_type: 'radio',
+          group_open: false,
+          options: [
+            {
+              id: 6,
+              text: '$1.00',
+              price: 1.00,
+            },
+            {
+              id: 7,
+              text: '$2.00',
+              price: 2.00,
+            },
+            {
+              id: 8,
+              text: '$3.00',
+              price: 3.00,
+            },
+          ]
+        },
+      ]
+    },
+    methods: {
+      toggleGroup: function(group) {
+        group.group_open = !group.group_open;
+      },
+
+      toggleCheckoutTxt: function() {
+        //using settimeout for toggle to make sure element is finished before next one shows up
+        if(this.show_filter_options && !this.checkout_btn_disabled) {
+          this.checkout_btn_text = 'Back to Review Options'
+          this.show_filter_options = false;
+          this.checkout_btn_disabled = true;          
+          setTimeout(() => {
+            this.show_email_checkout = true;
+            this.checkout_btn_disabled = false;
+          }, 900);
+        } 
+        if(this.show_email_checkout && !this.checkout_btn_disabled) {
+          this.checkout_btn_text = 'Checkout'
+          this.show_email_checkout = false;
+          this.checkout_btn_disabled = true;
+          setTimeout(() => {
+            this.show_filter_options = true
+            this.checkout_btn_disabled = false;
+          }, 900);
+        }
+      }
+    },
+    watch: {
+        selected_filters: function() {
+        var tmp_total = 0;
+
+        this.selected_filters.forEach(option => {
+          tmp_total += option.price;
+        });
+
+        this.total_price = tmp_total;
+      }
+    }
+  })
+</script>
+
+
+
+<%- include partials/footer.ejs %>

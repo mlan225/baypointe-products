@@ -1,0 +1,241 @@
+body {
+  font-family: Helvetica,arial,sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.6em;
+  letter-spacing: 0px;
+  font-size: 14px;
+  -webkit-font-smoothing: subpixel antialiasing !important;
+  background-color: #fff;
+  color: #666;
+  position: relative;
+}
+
+.site-alignment-center #header {
+  position: relative;
+}
+
+#headerWrapper {
+  position: relative;
+  z-index: 999;
+  padding: 20px;
+}
+
+#header {
+  padding-bottom: 40px;
+}
+
+#logo {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+.logo {
+  line-height: 0;
+  margin: 0;
+  display: inline-block;
+  height: 95px;
+}
+
+.logo img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#logo, #topNav {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+#topNav li{
+  display: inline;
+  margin-right: 35px;
+  position: relative;
+}
+
+#topNav li a {
+  line-height: 28px;
+}
+
+.main-nav a {
+  color: #9c9c9c;
+}
+
+@media(max-width: 800px) {
+  .main-nav {
+    display: none;
+  }
+}
+
+@media(min-width: 800px) {
+  .mobileNav {
+    display: none;
+  }
+}
+
+#header nav a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.mobileNav {
+  overflow: hidden;
+  background: #111;
+  margin: 0 0 15px;
+  transition: .8s;
+  height: 0px;
+}
+
+.mobileNav .wrapper {
+  padding: 20px;
+}
+
+.mobileNav nav ul {
+  padding: 0;
+}
+
+.mobileNav nav ul li {
+  display: block;
+  text-align: center;
+  float: none !important;
+}
+
+.mobileNavLink {
+  display: none;
+}
+
+.mobileNavLink .row div {
+  width: 100%;
+}
+
+.mobileNav {
+  height: 0;
+  margin: 0 0 15px;
+}
+
+.mobileNav.openMobileNav {
+  height: 348px;
+}
+
+@media (max-width: 800px) {
+  .mobileNavLink {
+    text-align: center;
+    cursor: pointer;
+      display: block;
+      margin: 0;
+      font-size: 16px !important;
+      color: #9c9c9c;
+      width: 100%;
+  }
+
+  .mobileNav a {
+    color: rgba(156,156,156,.7);
+    font-size: 16px !important;
+    line-height: 2.5em !important;
+    font-family: 'Montserrat', sans-serif;;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: none;
+    font-size: 14px;
+    letter-spacing: 0px;
+  }
+}
+
+.option-dropdown {
+  height: 0;
+  transition: .8s;
+  overflow: hidden;
+}
+
+.option-dropdown.open {
+  height: 150px;
+}
+
+.option-group-text {
+  /* border: 1px solid black;
+  /* border-radius: 5px; */
+  padding: 5px;
+  /* background: #8080804a; */
+}
+
+.option-group .open-icon {
+  position: absolute;
+  right: 25px;
+}
+
+.option-group {
+  position: relative;
+  margin: 10px;
+  border-bottom: 1px solid #80808024;
+}
+
+.option-group-text i {
+  transform: rotateZ(0);
+  transition: .8s ease;
+}
+
+.option-group-text i.turn {
+  transform: rotateZ(180deg)
+}
+
+.category-image {
+  height: 500px;
+  background: url('https://images.squarespace-cdn.com/content/v1/55afc839e4b0764d76e73a0f/1517239828007-HDYSN0F0R0EH26T5JOKF/ke17ZwdGBToddI8pDm48kIFiTCgAmSPQIDLkJ0z1RisUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcjRCeDHDjdIvx_vR0yIQ7-LDClRjkEla3em_Ls2ZPGAcLkiEQIT04ymfJCfN_Uovl/web_urban_DSC5987.jpg?format=1000w');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 3px 3px 20px #808080;
+}
+
+.filter-title {
+  padding-bottom: 25px;
+}
+
+.total-section {
+  position: fixed;
+  height: 150px;
+  left: 0;
+  background:#f8f8f8;
+  bottom: 0;
+  border-top: 1px solid #00000026;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.product-filter-container {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.btn-danger.bp-btn {
+  background: linear-gradient(180deg, #bc3b00 0%, rgb(255, 255, 255) 400%);
+  border: none;
+  transition: all 0.3s ease 0s;
+}
+
+.btn-danger.bp-btn:hover {
+  background: linear-gradient(180deg, #942f01 0%, rgb(255, 255, 255) 400%);
+}
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: .8s;
+}
+.slide-enter {
+  transform: translate(150%, 0);
+}
+.slide-leave-to {
+  transform: translate(-150%, 0);
+}
+
+.email-section-text {
+  padding-bottom: 25px;
+}
